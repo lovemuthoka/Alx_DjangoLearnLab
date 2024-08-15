@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from .models import Book
+from django.views.generic import ListView
+from .models import Library, Book
 
 def book_list_view(request):
     books = Book.objects.all()
     book_list = [(book.title, book.author) for book in books]
     return render(request, 'book_list.html', {'book_list': book_list})
 
-from django.views.generic import ListView
-from .models import Library, Book
 
 class LibraryDetailView(ListView):
     model = Book

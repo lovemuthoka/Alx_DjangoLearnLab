@@ -1,6 +1,12 @@
-<h1>Library {{ library_id }} Books</h1>
-<ul>
-    {% for book in object_list %}
-        <li>{{ book.title }} by {{ book.author }}</li>
-    {% endfor %}
-</ul>
+<
+from django.views.generic import ListView
+from .models import Library, Book
+
+class LibraryDetailView(ListView):
+    model = Book
+    template_name = 'relationship_app/list_books.html'  # Or 'relationship_app/library_detail.html' if distinct
+    context_object_name = 'books'
+
+    def get_queryset(self):
+        library_id = self.kwargs['library_id']
+        return Book.objects.filter(library__id=library_id)
