@@ -1,0 +1,15 @@
+<!-- relationship_app/templates/relationship_app/list_books.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    <ul>
+        {% for title, author in book_list %}
+            <li>{{ title }} by {{ author }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
