@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView 
-from .models import Library  # Ensure both Book and Library models are imported
+from .models import Libraryfrom django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
+  
 
 # Function-based view to list all books
 def book_list_view(request):
@@ -17,3 +21,14 @@ class LibraryDetailView(ListView):
     def get_queryset(self):
         library_id = self.kwargs['library_id']  # Retrieve the library_id from the URL
         return Book.objects.filter(library__id=library_id)  # Filter books by the specified library
+    
+    class CustomLoginView(LoginView):
+    template_name = 'relationship_app/login.html'
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+
+class RegisterView(generic.CreateView):
+    form_class = UserCreationForm
+    template_name = 'relationship_app/register.html'
+    success_url = reverse_lazy('login')
