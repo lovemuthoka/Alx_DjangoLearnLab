@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView 
 from django.contrib.auth import login
+from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -23,12 +24,13 @@ class LibraryDetailView(ListView):
         return Book.objects.filter(library__id=library_id)  # Filter books by the specified library
     
     class CustomLoginView(LoginView):
+    
     template_name = 'relationship_app/login.html'
 
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('login')
 
-class RegisterView(generic.CreateView):
+class RegisterView(CreateView):
     form_class = UserCreationForm
     template_name = 'relationship_app/register.html'
     success_url = reverse_lazy('login')
