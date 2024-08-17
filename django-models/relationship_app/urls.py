@@ -6,6 +6,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import views as auth_views
 from .views import admin_view, librarian_view, member_view
+from . import views
+
 urlpatterns = [
     # URL pattern for the function-based view that lists all books
     path('books/', book_list_view, name='book-list'),
@@ -27,4 +29,9 @@ urlpatterns = [
     path('librarian/', librarian_view, name='librarian_view'),
     path('member/', member_view, name='member_view'),
     # Other URL patterns...
+]
+urlpatterns = [
+    path('add/', views.add_book, name='add_book'),
+    path('edit/<int:book_id>/', views.edit_book, name='edit_book'),
+    path('delete/<int:book_id>/', views.delete_book, name='delete_book'),
 ]
