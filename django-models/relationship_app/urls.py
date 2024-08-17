@@ -31,7 +31,14 @@ urlpatterns = [
     # Other URL patterns...
 ]
 urlpatterns = [
+     # Other URL patterns...
+
+    # URL pattern for adding a book
     path('add/', views.add_book, name='add_book'),
+
+    # URL pattern for editing a book
     path('edit/<int:book_id>/', views.edit_book, name='edit_book'),
+
+    # URL pattern for deleting a book
     path('delete/<int:book_id>/', views.delete_book, name='delete_book'),
 ]
