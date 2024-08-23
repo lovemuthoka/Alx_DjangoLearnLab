@@ -6,6 +6,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Book
 from .forms import BookForm
+from django.http import HttpResponse
+from .forms import ExampleForm
 
 # Function-Based View for Editing a Book
 @permission_required('bookshelf.can_edit', raise_exception=True)
@@ -57,4 +59,18 @@ class BookDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'bookshelf.can_delete'
     raise_exception = True
 
+@permission_required('bookshelf.can_edit', raise_exception=True)
+def book_list(request):
+    return HttpResponse
 
+@permission_required('bookshelf.can_delete', raise_exception=True)
+def book_list(request):
+    return HttpResponse
+
+@permission_required('bookshelf.can_create', raise_exception=True)
+def book_list(request):
+    return HttpResponse
+
+@permission_required('bookshelf.can_view', raise_exception=True)
+def book_list(request):
+    return HttpResponse
