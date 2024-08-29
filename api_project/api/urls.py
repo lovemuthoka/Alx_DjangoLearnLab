@@ -1,10 +1,14 @@
+from django.urls import path
+from .views import BookList
+
+urlpatterns = [
+    path('books/', BookList.as_view(), name='book-list'),
+]
+
 from django.contrib import admin
 from django.urls import path, include
 
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("api.urls"))
+    path('api/', include('api.urls')),  # Include API app URLs
 ]
