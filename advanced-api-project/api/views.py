@@ -4,6 +4,7 @@ from .models import Book
 from .serializers import BookSerializer
 from rest_framework.exceptions import ValidationError
 import datetime
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 # List all books (read-only access for unauthenticated users)
 class BookListView(generics.ListAPIView):
