@@ -21,7 +21,7 @@ class BookListView(generics.ListAPIView):
 class BookDetailView(generics.RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-
+    filter_backends = [filters.OrderingFilter]
 # Create a new book (restricted to authenticated users)
 class BookCreateView(generics.CreateAPIView):
     queryset = Book.objects.all()
