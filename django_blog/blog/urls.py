@@ -31,11 +31,27 @@ from .views import (
 )
 
 from django.urls import path
-from . import views
+from .views import (
+    CommentCreateView,
+    CommentUpdateView,
+    CommentDeleteView,
+    PostListView,   # Assuming you have a view for listing posts
+    PostDetailView  # Assuming you have a view for showing a single post
+)
 
 urlpatterns = [
-    
-    path('posts/<int:post_id>/comments/new/', views.CommentCreateView.as_view(), name='add-comment'),
+    # URL pattern for listing all posts
+    path('', PostListView.as_view(), name='post-list'),
+
+    # URL pattern for viewing a single post
+    path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+
+    # URL pattern for creating a new comment
+    path('posts/<int:post_id>/comments/new/', CommentCreateView.as_view(), name='add-comment'),
+
+    # URL pattern for updating an existing comment
     path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='update-comment'),
-    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete-comment'),
+
+    # URL pattern for deleting a comment
+    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='delete-comment'),
 ]
