@@ -29,13 +29,7 @@ from . import views
 urlpatterns = [
     # Other URL patterns
     path('posts/<int:post_id>/comments/new/', views.add_comment, name='add-comment'),
-    path('comments/<int:pk>/edit/', views.CommentUpdateView.as_view(), name='edit-comment'),
+    path('comments/<int:pk>/update/', views.CommentUpdateView.as_view(), name='edit-comment'),
     path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete-comment'),
 ]
 
-urlpatterns = [
-    # Other URL patterns
-    path('posts/<int:post_id>/comments/new/', views.CommentCreateView.as_view(), name='add-comment'),
-    path('comments/<int:pk>/edit/', views.CommentUpdateView.as_view(), name='edit-comment'),
-    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete-comment'),
-]
