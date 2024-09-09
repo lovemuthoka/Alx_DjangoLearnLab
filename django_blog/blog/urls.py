@@ -24,37 +24,16 @@ urlpatterns = [
 
 
 from django.urls import path
-from .views import (
-    CommentCreateView,
-    CommentUpdateView,
-    CommentDeleteView,
-)
-
-from django.urls import path
-from .views import (
-    CommentCreateView,
-    CommentUpdateView,
-    CommentDeleteView,
-    PostListView,   # Assuming you have a view for listing posts
-    PostDetailView  # Assuming you have a view for showing a single post
-)
+from . import views
 
 urlpatterns = [
-    # URL pattern for listing all posts
-    path('', PostListView.as_view(), name='post-list'),
-
-    # URL pattern for viewing a single post
-    path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-
-    # URL pattern for creating a new comment
-    path('posts/<int:post_id>/comments/new/', CommentCreateView.as_view(), name='add-comment'),
-
-    # URL pattern for updating an existing comment
-    path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='update-comment'),
-
-    # URL pattern for deleting a comment
-    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='delete-comment'),
+    # ... existing URL patterns ...
+    path('post/<int:post_id>/comments/', views.post_comments, name='post_comments'),
+    path('post/<int:post_id>/comments/new/', views.create_comment, name='create_comment'),
+    path('comment/<int:pk>/update/', views.update_comment, name='update_comment'),
+    path('comment/<int:pk>/delete/', views.delete_comment, name='delete_comment'),
 ]
+
 
 
 from django.urls import path
