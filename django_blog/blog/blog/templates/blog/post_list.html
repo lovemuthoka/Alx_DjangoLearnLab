@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
+
 {% block content %}
   <h1>Blog Posts</h1>
   <ul>
-    {% for post in posts %}
+    {% for post in object_list %}
       <li>
-        <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a>
-        <p>{{ post.content|truncatewords:30 }}</p>  <!-- Show first 30 words as a snippet -->
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content|truncatewords:20 }}</p>
+        <a href="{% url 'post_detail' post.pk %}">Read more</a>
       </li>
-    {% empty %}
-      <p>No posts found.</p>
     {% endfor %}
   </ul>
 {% endblock %}
