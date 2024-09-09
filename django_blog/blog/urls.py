@@ -32,13 +32,13 @@ from .views import (
 
 urlpatterns = [
     # Other URL patterns for your blog app
+# URL pattern for updating an existing comment
+    path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='update-comment'),
 
     # URL pattern for creating a new comment
     path('posts/<int:post_id>/comments/new/', CommentCreateView.as_view(), name='add-comment'),
 
-    # URL pattern for updating an existing comment
-    path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='update-comment'),
-
+    
     # URL pattern for deleting a comment
     path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='delete-comment'),
 ]
