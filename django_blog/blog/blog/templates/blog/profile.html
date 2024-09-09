@@ -3,41 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
     <div class="profile-container">
-        <h1>Your Profile</h1>
-        <form method="POST" class="profile-form">
+        <h2>User Profile</h2>
+        <form method="POST" action="{% url 'update_profile' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
+            
+            <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="{{ user.username }}" readonly>
+                <input type="text" id="username" name="username" value="" required>
             </div>
 
-            <div class="form-group">
+            <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{ user.email }}">
+                <input type="email" id="email" name="email" value="" required>
             </div>
 
-            <div class="form-group">
-                <label for="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+            <div class="input-group">
+                <label for="profile_picture">Profile Picture</label>
+                <input type="file" id="profile_picture" name="profile_picture">
             </div>
 
-            <div class="form-group">
-                <label for="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
-            </div>
-
-            <div class="form-group">
-                <label for="password">Change Password</label>
-                <input type="password" id="password" name="password">
+            <div class="input-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio" rows="4"> </textarea>
             </div>
 
             <button type="submit" class="update-btn">Update Profile</button>
         </form>
+        <a href="{% url 'home' %}" class="back-link">Back to Home</a>
     </div>
 </body>
 </html>

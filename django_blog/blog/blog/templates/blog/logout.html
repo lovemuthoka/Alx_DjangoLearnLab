@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logout</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Logged Out</title>
+    <link rel="stylesheet" href="logout.css">
 </head>
 <body>
     <div class="logout-container">
-        <h1>You have successfully logged out</h1>
-        <p>Thank you for visiting! We hope to see you again soon.</p>
-        <a href="{% url 'login' %}" class="login-again-btn">Login Again</a>
+        <h2>Logged Out</h2>
+        <p>You have successfully logged out.</p>
+        <a href="{% url 'login' %}" class="login-link">Log in again</a>
     </div>
 </body>
 </html>
