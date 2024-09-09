@@ -85,3 +85,46 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author  # Only the post's author can delete the post
+
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import DetailView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from .models import Post, Comment
+from .forms import CommentForm
+
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, post=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post-detail', pk=post_id)
+    else:
+        form = CommentForm(post=post)
+    return render(request, 'blog/add_comment.html', {'form': form, 'post': post})
+
+@method_decorator(login_required, name='dispatch')
+class CommentUpdateView(UpdateView):
+    model = Comment
+    fields = ['content']
+    template_name = 'blog/edit_comment.html'
+
+    def get_queryset(self):
+        return Comment.objects.filter(author=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.updated_at = timezone.now()
+        return super().form_valid(form)
+
+@method_decorator(login_required, name='dispatch')
+class CommentDeleteView(DeleteView):
+    model = Comment
+    success_url = '/'
+    template_name = 'blog/delete_comment.html'
+
+    def get_queryset(self):
+        return Comment.objects.filter(author=self.request.user)
