@@ -55,3 +55,24 @@ urlpatterns = [
     # URL pattern for deleting a comment
     path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='delete-comment'),
 ]
+
+
+from django.urls import path
+from .views import (
+    PostListView,
+    PostDetailView,
+    CommentCreateView,
+    CommentUpdateView,
+    CommentDeleteView,
+    search_posts  # Add import
+)
+
+urlpatterns = [
+    # Existing URL patterns
+
+    # URL pattern for searching posts
+    path('search/', search_posts, name='search-posts'),
+
+    # URL pattern for viewing posts by tag
+    path('tags/<str:tag_name>/', PostListView.as_view(), name='posts-by-tag'),
+]

@@ -47,3 +47,14 @@ class CommentForm(forms.ModelForm):
         comment.post = self.post
         comment.save()
         return comment
+    
+    from django import forms
+from .models import Post
+from taggit.forms import TagField  # If using django-taggit
+
+class PostForm(forms.ModelForm):
+    tags = TagField(required=False)  # Use TagField if using django-taggit
+
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'tags']
