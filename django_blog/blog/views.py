@@ -108,7 +108,7 @@ def add_comment(request, post_id):
     return render(request, 'blog/add_comment.html', {'form': form, 'post': post})
 
 @method_decorator(login_required, name='dispatch')
-class CommentUpdateView(UpdateView):
+class CommentCreatView(UpdateView):
     model = Comment
     fields = ['content']
     template_name = 'blog/edit_comment.html'
