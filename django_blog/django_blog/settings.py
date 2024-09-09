@@ -121,7 +121,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "blog/static"),
+     BASE_DIR / "static",  # Optional, in case you want to collect static files from multiple apps
 ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"  # For production when you run `collectstatic`
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
