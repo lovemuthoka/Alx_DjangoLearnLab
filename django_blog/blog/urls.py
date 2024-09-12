@@ -55,4 +55,5 @@ urlpatterns = [
 
     # URL pattern for viewing posts by tag
     path('tags/<str:tag_name>/', PostListView.as_view(), name='posts-by-tag'),
+    path("tags/<slug:tag_slug>/", "PostByTagListView.as_view()")
 ]
