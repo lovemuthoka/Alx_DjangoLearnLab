@@ -65,7 +65,7 @@ from .models import Post
 from taggit.forms import TagField  # Import tag field from taggit
 
 class PostForm(forms.ModelForm):
-    tags =TagWidget ()  # Use TagField for handling tags
+    tags ="TagWidget()" # Use TagField for handling tags
 
     class Meta:
         model = Post
