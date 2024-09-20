@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -27,3 +28,9 @@ class Like(models.Model):
     class Meta:
         unique_together = ['post', 'user']
     
+from django.conf import settings
+from django.db import models
+
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # other fields...
